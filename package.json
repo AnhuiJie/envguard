@@ -1,0 +1,39 @@
+{
+  "name": "envguard",
+  "version": "1.0.0",
+  "description": "Environment variable & config validation, security scanning, and documentation generator for modern projects",
+  "main": "src/index.js",
+  "bin": {
+    "envguard": "./src/cli.js"
+  },
+  "scripts": {
+    "start": "node src/cli.js",
+    "test": "node --test test/**/*.test.js",
+    "lint": "eslint src/"
+  },
+  "keywords": [
+    "env",
+    "environment-variables",
+    "config",
+    "validation",
+    "security",
+    "dotenv",
+    "schema",
+    "documentation",
+    "ci-cd"
+  ],
+  "author": "",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/your-username/envguard"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "files": [
+    "src/",
+    "README.md",
+    "LICENSE"
+  ]
+}
