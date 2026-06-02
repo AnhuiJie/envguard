@@ -4,7 +4,7 @@
 
 **Environment Variable Validation, Security Scanning & Documentation Generator**
 
-[![CI](https://github.com/your-username/envguard/actions/workflows/ci.yml/badge.svg)](https://github.com/your-username/envguard/actions/workflows/ci.yml)
+[![CI](https://github.com/AnhuiJie/envguard/actions/workflows/ci.yml/badge.svg)](https://github.com/AnhuiJie/envguard/actions/workflows/ci.yml)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![Node.js >=18](https://img.shields.io/badge/node-%3E%3D18-green.svg)](https://nodejs.org/)
 

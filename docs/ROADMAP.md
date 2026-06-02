@@ -23,7 +23,7 @@
   - 支持 `pyproject.toml` / `setup.py` 读取配置
   - 支持 `.env` / `.ini` / `yaml` 配置格式
 
-- [ ] **Go CLI** (`go install github.com/your-username/envguard/cmd/envguard@latest`)
+- [ ] **Go CLI** (`go install github.com/AnhuiJie/envguard/cmd/envguard@latest`)
   - 单二进制分发，无运行时依赖
   - 适合 CI/CD 环境和容器化部署
 

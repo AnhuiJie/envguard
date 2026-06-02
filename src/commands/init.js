@@ -9,7 +9,7 @@ const { loadEnvFile } = require('../utils/file');
 
 const CONFIG_TEMPLATE = `/**
  * EnvGuard Configuration
- * @see https://github.com/your-username/envguard#configuration
+ * @see https://github.com/AnhuiJie/envguard#configuration
  */
 module.exports = {
   // Define your environment variable schema

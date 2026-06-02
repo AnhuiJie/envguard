@@ -8,7 +8,7 @@
 | 名字 | （请填写） |
 | 电子邮箱 | （请填写，与 ChatGPT 账户关联的邮箱） |
 | GitHub 用户名 | （请填写，需设为公开） |
-| GitHub 代码仓库 URL | （请填写，推送后填入，如 https://github.com/your-username/envguard） |
+| GitHub 代码仓库 URL | （请填写，推送后填入，如 https://github.com/AnhuiJie/envguard） |
 | OpenAI 组织 ID | （请填写，在 https://platform.openai.com/account/org-settings 获取） |
 
 ---
