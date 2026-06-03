@@ -5,6 +5,7 @@
 **Environment Variable Validation, Security Scanning & Documentation Generator**
 
 [![CI](https://github.com/AnhuiJie/envguard/actions/workflows/ci.yml/badge.svg)](https://github.com/AnhuiJie/envguard/actions/workflows/ci.yml)
+[![npm version](https://img.shields.io/npm/v/@anhuijie/envguard.svg)](https://www.npmjs.com/package/@anhuijie/envguard)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![Node.js >=18](https://img.shields.io/badge/node-%3E%3D18-green.svg)](https://nodejs.org/)
 
@@ -36,7 +37,7 @@ Misconfigured environment variables are a leading cause of production incidents.
 
 ```bash
 # Install
-npm install -g envguard
+npm install -g @anhuijie/envguard
 
 # Create config
 envguard init
@@ -137,10 +138,10 @@ EnvGuard detects these secret types:
 
 ```yaml
 - name: Validate env config
-  run: npx envguard validate
+  run: npx @anhuijie/envguard validate
 
 - name: Security check
-  run: npx envguard check
+  run: npx @anhuijie/envguard check
 ```
 
 The command exits with code `1` on validation errors or critical security findings, failing the build.
@@ -148,7 +149,7 @@ The command exits with code `1` on validation errors or critical security findin
 ### Programmatic API
 
 ```js
-const { validateEnv, scanForSecrets, generateEnvExample } = require('envguard');
+const { validateEnv, scanForSecrets, generateEnvExample } = require('@anhuijie/envguard');
 
 const schema = { PORT: { required: true, type: 'port' } };
 const result = validateEnv(process.env, schema);
@@ -189,7 +190,7 @@ const example = generateEnvExample(schema);
 
 ```bash
 # 安装
-npm install -g envguard
+npm install -g @anhuijie/envguard
 
 # 创建配置
 envguard init
@@ -276,10 +277,10 @@ EnvGuard 可检测以下密钥类型：
 
 ```yaml
 - name: 验证环境配置
-  run: npx envguard validate
+  run: npx @anhuijie/envguard validate
 
 - name: 安全检查
-  run: npx envguard check
+  run: npx @anhuijie/envguard check
 ```
 
 验证失败或发现严重安全问题时，命令以退出码 `1` 退出，使构建失败。
@@ -287,7 +288,7 @@ EnvGuard 可检测以下密钥类型：
 ### 编程式 API
 
 ```js
-const { validateEnv, scanForSecrets, generateEnvExample } = require('envguard');
+const { validateEnv, scanForSecrets, generateEnvExample } = require('@anhuijie/envguard');
 
 const schema = { PORT: { required: true, type: 'port' } };
 const result = validateEnv(process.env, schema);
@@ -328,7 +329,7 @@ const example = generateEnvExample(schema);
 
 ```bash
 # インストール
-npm install -g envguard
+npm install -g @anhuijie/envguard
 
 # 設定ファイルの作成
 envguard init
@@ -415,10 +416,10 @@ EnvGuard は以下のシークレットタイプを検出します：
 
 ```yaml
 - name: 環境設定の検証
-  run: npx envguard validate
+  run: npx @anhuijie/envguard validate
 
 - name: セキュリティチェック
-  run: npx envguard check
+  run: npx @anhuijie/envguard check
 ```
 
 検証エラーや重大なセキュリティ問題が見つかった場合、コマンドは終了コード `1` で終了し、ビルドを失敗させます。
@@ -426,7 +427,7 @@ EnvGuard は以下のシークレットタイプを検出します：
 ### プログラマティック API
 
 ```js
-const { validateEnv, scanForSecrets, generateEnvExample } = require('envguard');
+const { validateEnv, scanForSecrets, generateEnvExample } = require('@anhuijie/envguard');
 
 const schema = { PORT: { required: true, type: 'port' } };
 const result = validateEnv(process.env, schema);

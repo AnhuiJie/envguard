@@ -1,5 +1,5 @@
 {
-  "name": "envguard",
+  "name": "@anhuijie/envguard",
   "version": "1.0.0",
   "description": "Environment variable & config validation, security scanning, and documentation generator for modern projects",
   "main": "src/index.js",
@@ -22,7 +22,7 @@
     "documentation",
     "ci-cd"
   ],
-  "author": "",
+  "author": "AnhuiJie <anhuijie@example.com>",
   "license": "MIT",
   "repository": {
     "type": "git",
