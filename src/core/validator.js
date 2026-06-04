@@ -66,6 +66,74 @@ const validators = {
     }
     return { valid: true };
   },
+
+  // Date type: validates ISO 8601 date strings (YYYY-MM-DD or full ISO format)
+  date: (value) => {
+    const dateRegex = /^\d{4}-\d{2}-\d{2}(T\d{2}:\d{2}:\d{2}(\.\d+)?(Z|[+-]\d{2}:?\d{2})?)?$/;
+    if (!dateRegex.test(value)) {
+      return { valid: false, error: `"${value}" is not a valid date (expected ISO 8601 format, e.g. 2024-01-15)` };
+    }
+    const parsed = new Date(value);
+    if (isNaN(parsed.getTime())) {
+      return { valid: false, error: `"${value}" is not a valid date` };
+    }
+    return { valid: true };
+  },
+
+  // Semver type: validates semantic version strings (e.g. 1.2.3, 1.0.0-beta.1)
+  semver: (value) => {
+    const semverRegex = /^\d+\.\d+\.\d+(-[a-zA-Z0-9]+(\.[a-zA-Z0-9]+)*)?(\+[a-zA-Z0-9]+(\.[a-zA-Z0-9]+)*)?$/;
+    return semverRegex.test(value)
+      ? { valid: true }
+      : { valid: false, error: `"${value}" is not a valid semver (expected format: X.Y.Z, e.g. 1.2.3)` };
+  },
+
+  // Color type: validates CSS color values (hex, rgb, rgba, hsl, named colors)
+  color: (value) => {
+    const str = String(value).trim();
+    // Hex: #RGB, #RRGGBB, #RRGGBBAA
+    if (/^#([0-9A-Fa-f]{3}|[0-9A-Fa-f]{6}|[0-9A-Fa-f]{8})$/.test(str)) {
+      return { valid: true };
+    }
+    // rgb/rgba
+    if (/^rgba?\(\s*\d+(\.\d+)?%?\s*(,\s*\d+(\.\d+)?%?\s*){2,3}\)$/.test(str)) {
+      return { valid: true };
+    }
+    // hsl/hsla
+    if (/^hsla?\(\s*\d+(\.\d+)?(deg)?\s*(,\s*\d+(\.\d+)?%?\s*){2,3}\)$/.test(str)) {
+      return { valid: true };
+    }
+    // Named CSS colors
+    const namedColors = [
+      'aliceblue', 'antiquewhite', 'aqua', 'aquamarine', 'azure', 'beige', 'bisque', 'black',
+      'blanchedalmond', 'blue', 'blueviolet', 'brown', 'burlywood', 'cadetblue', 'chartreuse',
+      'chocolate', 'coral', 'cornflowerblue', 'cornsilk', 'crimson', 'cyan', 'darkblue',
+      'darkcyan', 'darkgoldenrod', 'darkgray', 'darkgreen', 'darkgrey', 'darkkhaki',
+      'darkmagenta', 'darkolivegreen', 'darkorange', 'darkorchid', 'darkred', 'darksalmon',
+      'darkseagreen', 'darkslateblue', 'darkslategray', 'darkslategrey', 'darkturquoise',
+      'darkviolet', 'deeppink', 'deepskyblue', 'dimgray', 'dimgrey', 'dodgerblue', 'firebrick',
+      'floralwhite', 'forestgreen', 'fuchsia', 'gainsboro', 'ghostwhite', 'gold', 'goldenrod',
+      'gray', 'green', 'greenyellow', 'grey', 'honeydew', 'hotpink', 'indianred', 'indigo',
+      'ivory', 'khaki', 'lavender', 'lavenderblush', 'lawngreen', 'lemonchiffon', 'lightblue',
+      'lightcoral', 'lightcyan', 'lightgoldenrodyellow', 'lightgray', 'lightgreen', 'lightgrey',
+      'lightpink', 'lightsalmon', 'lightseagreen', 'lightskyblue', 'lightslategray',
+      'lightslategrey', 'lightsteelblue', 'lightyellow', 'lime', 'limegreen', 'linen', 'magenta',
+      'maroon', 'mediumaquamarine', 'mediumblue', 'mediumorchid', 'mediumpurple',
+      'mediumseagreen', 'mediumslateblue', 'mediumspringgreen', 'mediumturquoise',
+      'mediumvioletred', 'midnightblue', 'mintcream', 'mistyrose', 'moccasin', 'navajowhite',
+      'navy', 'oldlace', 'olive', 'olivedrab', 'orange', 'orangered', 'orchid', 'palegoldenrod',
+      'palegreen', 'paleturquoise', 'palevioletred', 'papayawhip', 'peachpuff', 'peru', 'pink',
+      'plum', 'powderblue', 'purple', 'rebeccapurple', 'red', 'rosybrown', 'royalblue',
+      'saddlebrown', 'salmon', 'sandybrown', 'seagreen', 'seashell', 'sienna', 'silver',
+      'skyblue', 'slateblue', 'slategray', 'slategrey', 'snow', 'springgreen', 'steelblue',
+      'tan', 'teal', 'thistle', 'tomato', 'turquoise', 'violet', 'wheat', 'white', 'whitesmoke',
+      'yellow', 'yellowgreen',
+    ];
+    if (namedColors.includes(str.toLowerCase())) {
+      return { valid: true };
+    }
+    return { valid: false, error: `"${value}" is not a valid color (expected hex, rgb, hsl, or named CSS color)` };
+  },
 };
 
 function validateValue(value, rule) {

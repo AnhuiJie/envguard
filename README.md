@@ -104,6 +104,9 @@ module.exports = {
 | `port` | Valid port number (0-65535) | `3000` |
 | `json` | Valid JSON string | `'{"key":"value"}'` |
 | `regex` | Valid regex pattern | `^\\d+$` |
+| `date` | ISO 8601 date string | `2024-01-15` |
+| `semver` | Semantic version | `1.2.3` |
+| `color` | CSS color (hex, rgb, named) | `#ff6600` |
 
 ### Rule Options
 
@@ -257,6 +260,9 @@ module.exports = {
 | `port` | 合法端口号 (0-65535) | `3000` |
 | `json` | 合法 JSON 字符串 | `'{"key":"value"}'` |
 | `regex` | 合法正则表达式 | `^\\d+$` |
+| `date` | ISO 8601 日期字符串 | `2024-01-15` |
+| `semver` | 语义化版本号 | `1.2.3` |
+| `color` | CSS 颜色（hex、rgb、命名色） | `#ff6600` |
 
 ### 安全扫描
 
@@ -396,6 +402,9 @@ module.exports = {
 | `port` | 有効なポート番号 (0-65535) | `3000` |
 | `json` | 有効な JSON 文字列 | `'{"key":"value"}'` |
 | `regex` | 有効な正規表現パターン | `^\\d+$` |
+| `date` | ISO 8601 日付文字列 | `2024-01-15` |
+| `semver` | セマンティックバージョン | `1.2.3` |
+| `color` | CSS カラー（hex、rgb、名前付き） | `#ff6600` |
 
 ### セキュリティスキャン
 

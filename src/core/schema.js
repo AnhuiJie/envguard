@@ -2,7 +2,7 @@
  * Schema definition and parsing for envguard.config.js
  */
 
-const SUPPORTED_TYPES = ['string', 'number', 'boolean', 'url', 'email', 'json', 'regex', 'port'];
+const SUPPORTED_TYPES = ['string', 'number', 'boolean', 'url', 'email', 'json', 'regex', 'port', 'date', 'semver', 'color'];
 
 function validateSchema(schema) {
   if (!schema || typeof schema !== 'object') {

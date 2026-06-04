@@ -48,6 +48,23 @@ module.exports = {
     //   type: 'string',
     //   description: 'External API key',
     // },
+
+    // ── Additional Types ─────────────────
+    // APP_VERSION: {
+    //   required: false,
+    //   type: 'semver',
+    //   description: 'Application version (e.g. 1.2.3)',
+    // },
+    // RELEASE_DATE: {
+    //   required: false,
+    //   type: 'date',
+    //   description: 'Release date (ISO 8601, e.g. 2024-01-15)',
+    // },
+    // BRAND_COLOR: {
+    //   required: false,
+    //   type: 'color',
+    //   description: 'Primary brand color (hex, rgb, or named CSS color)',
+    // },
   },
 
   // Security scanning options
