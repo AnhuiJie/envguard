@@ -7,6 +7,7 @@ const { validateEnv } = require('./validator');
 const { scanForSecrets } = require('./security');
 const { generateEnvExample, generateMarkdownDoc, writeDocs } = require('./docs');
 const { parseEnvFile, diffEnvs, formatDiffResult } = require('./diff');
+const { redactObject, redactString, isSensitiveKey, createRedactionMiddleware } = require('./redact');
 
 module.exports = {
   parseSchema,
@@ -19,4 +20,8 @@ module.exports = {
   parseEnvFile,
   diffEnvs,
   formatDiffResult,
+  redactObject,
+  redactString,
+  isSensitiveKey,
+  createRedactionMiddleware,
 };

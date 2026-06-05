@@ -9,8 +9,9 @@ const { runValidate } = require('./commands/validate');
 const { runCheck } = require('./commands/check');
 const { runDocs } = require('./commands/docs');
 const { runDiff } = require('./commands/diff');
+const { runRedact } = require('./commands/redact');
 
-const VERSION = '1.0.0';
+const VERSION = '1.1.0';
 
 function parseArgs(argv) {
   const args = argv.slice(2);
@@ -55,6 +56,7 @@ Commands:
   check             Scan .env files for sensitive information
   docs              Generate .env.example and documentation
   diff              Compare two .env files
+  redact            Redact sensitive values in .env files or log output
 
 Options:
   --config <path>   Path to config file
@@ -64,6 +66,9 @@ Options:
   --recursive       Scan subdirectories for .env files
   --force           Overwrite existing files
   --allow-failure   Exit with code 0 even on errors
+  --mask <string>   Redaction mask (default: ***)
+  --text <string>   Text to redact (for redact command)
+  --ignore-keys <list> Keys to ignore during redaction (comma-separated)
   --help            Show this help message
   --version         Show version number
 
@@ -74,6 +79,9 @@ Examples:
   envguard check --recursive
   envguard docs --output ./docs
   envguard diff .env.development .env.production
+  envguard redact
+  envguard redact --output .env.redacted
+  envguard redact --text "Connected as admin:s3cret@db"
 `);
 }
 
@@ -105,6 +113,9 @@ function main() {
       break;
     case 'diff':
       runDiff({ ...options, cwd: process.cwd() });
+      break;
+    case 'redact':
+      runRedact({ ...options, cwd: process.cwd() });
       break;
     default:
       printHelp();

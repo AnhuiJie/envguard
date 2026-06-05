@@ -27,6 +27,7 @@ Misconfigured environment variables are a leading cause of production incidents.
 
 - **Schema Validation** — Define types, required fields, enums, ranges, and patterns for every variable
 - **Security Scanning** — Detect accidentally committed secrets (AWS keys, GitHub tokens, private keys, etc.)
+- **Log Redaction** — Automatically redact sensitive values in .env files and log output
 - **Auto Documentation** — Generate `.env.example` and markdown docs from your schema
 - **Environment Diff** — Compare `.env` files across dev/staging/prod to find drift
 - **CI/CD Ready** — Exit codes and GitHub Action integration for automated checks
@@ -53,6 +54,10 @@ envguard docs
 
 # Compare environments
 envguard diff .env.development .env.production
+
+# Redact sensitive values
+envguard redact
+envguard redact --output .env.redacted
 ```
 
 ### Configuration
@@ -135,6 +140,46 @@ EnvGuard detects these secret types:
 - Database URLs with embedded passwords
 - Generic API Keys, Passwords, and Secrets
 
+### Log Redaction
+
+Redact sensitive values before sharing .env files or log output:
+
+```bash
+# Redact .env file values (shows which keys are redacted)
+envguard redact
+
+# Write redacted file to disk
+envguard redact --output .env.redacted
+
+# Redact a text string (e.g. log message)
+envguard redact --text "Connected as admin:s3cret@db.example.com"
+
+# Custom redaction mask
+envguard redact --mask "[REDACTED]"
+
+# Skip specific keys
+envguard redact --ignore-keys "NODE_ENV,APP_NAME"
+```
+
+Programmatic API:
+
+```js
+const { redactObject, redactString, createRedactionMiddleware } = require('@anhuijie/envguard');
+
+// Redact an object
+const safe = redactObject(process.env);
+// { API_KEY: '***', DATABASE_URL: '***', PORT: '3000' }
+
+// Redact a string
+const safeLog = redactString('User logged in with token=ghp_abc123');
+// 'User logged in with token=***'
+
+// Create middleware for logging libraries
+const middleware = createRedactionMiddleware({ mask: '[HIDDEN]' });
+console.log(middleware('JWT_SECRET=abc123'));
+// 'JWT_SECRET=[HIDDEN]'
+```
+
 ### CI/CD Integration
 
 **GitHub Actions:**
@@ -152,7 +197,7 @@ The command exits with code `1` on validation errors or critical security findin
 ### Programmatic API
 
 ```js
-const { validateEnv, scanForSecrets, generateEnvExample } = require('@anhuijie/envguard');
+const { validateEnv, scanForSecrets, generateEnvExample, redactObject, redactString } = require('@anhuijie/envguard');
 
 const schema = { PORT: { required: true, type: 'port' } };
 const result = validateEnv(process.env, schema);
@@ -163,6 +208,9 @@ const secrets = scanForSecrets(process.env);
 
 const example = generateEnvExample(schema);
 // "# Server port\n# type: port\nPORT=\n"
+
+const safeEnv = redactObject(process.env);
+// { API_KEY: '***', PORT: '3000' }
 ```
 
 ### License
@@ -294,7 +342,7 @@ EnvGuard 可检测以下密钥类型：
 ### 编程式 API
 
 ```js
-const { validateEnv, scanForSecrets, generateEnvExample } = require('@anhuijie/envguard');
+const { validateEnv, scanForSecrets, generateEnvExample, redactObject, redactString } = require('@anhuijie/envguard');
 
 const schema = { PORT: { required: true, type: 'port' } };
 const result = validateEnv(process.env, schema);
@@ -305,6 +353,9 @@ const secrets = scanForSecrets(process.env);
 
 const example = generateEnvExample(schema);
 // "# Server port\n# type: port\nPORT=\n"
+
+const safeEnv = redactObject(process.env);
+// { API_KEY: '***', PORT: '3000' }
 ```
 
 ### 许可证
@@ -436,7 +487,7 @@ EnvGuard は以下のシークレットタイプを検出します：
 ### プログラマティック API
 
 ```js
-const { validateEnv, scanForSecrets, generateEnvExample } = require('@anhuijie/envguard');
+const { validateEnv, scanForSecrets, generateEnvExample, redactObject, redactString } = require('@anhuijie/envguard');
 
 const schema = { PORT: { required: true, type: 'port' } };
 const result = validateEnv(process.env, schema);
@@ -447,6 +498,9 @@ const secrets = scanForSecrets(process.env);
 
 const example = generateEnvExample(schema);
 // "# Server port\n# type: port\nPORT=\n"
+
+const safeEnv = redactObject(process.env);
+// { API_KEY: '***', PORT: '3000' }
 ```
 
 ### ライセンス
