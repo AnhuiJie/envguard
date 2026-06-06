@@ -28,6 +28,7 @@ Misconfigured environment variables are a leading cause of production incidents.
 - **Schema Validation** — Define types, required fields, enums, ranges, and patterns for every variable
 - **Security Scanning** — Detect accidentally committed secrets (AWS keys, GitHub tokens, private keys, etc.)
 - **Log Redaction** — Automatically redact sensitive values in .env files and log output
+- **Framework Templates** — One-command config generation for Next.js, Express, Django, Rails, and more
 - **Auto Documentation** — Generate `.env.example` and markdown docs from your schema
 - **Environment Diff** — Compare `.env` files across dev/staging/prod to find drift
 - **CI/CD Ready** — Exit codes and GitHub Action integration for automated checks
@@ -58,6 +59,15 @@ envguard diff .env.development .env.production
 # Redact sensitive values
 envguard redact
 envguard redact --output .env.redacted
+
+# List available framework templates
+envguard template list
+
+# Apply a framework template
+envguard template apply nextjs
+
+# Merge template into existing config
+envguard template apply express --merge
 ```
 
 ### Configuration
@@ -179,6 +189,41 @@ const middleware = createRedactionMiddleware({ mask: '[HIDDEN]' });
 console.log(middleware('JWT_SECRET=abc123'));
 // 'JWT_SECRET=[HIDDEN]'
 ```
+
+
+### Framework Templates
+
+Generate project-specific configuration from built-in templates:
+
+```bash
+# List all available templates
+envguard template list
+
+# Apply a template (creates envguard.config.js)
+envguard template apply nextjs
+envguard template apply express
+envguard template apply django
+envguard template apply rails
+envguard template apply docker-compose
+envguard template apply serverless
+
+# Merge template into existing config
+envguard template apply express --merge
+
+# Overwrite existing config
+envguard template apply nextjs --force
+```
+
+Available templates:
+
+| Template | Description | Variables |
+|----------|-------------|-----------|
+| `nextjs` | Next.js full-stack application | 11 vars (5 required) |
+| `express` | Express.js REST API server | 12 vars (3 required) |
+| `django` | Django Python web application | 16 vars (4 required) |
+| `rails` | Ruby on Rails web application | 18 vars (3 required) |
+| `docker-compose` | Docker Compose multi-container setup | 18 vars (1 required) |
+| `serverless` | Serverless Framework AWS Lambda | 20 vars (2 required) |
 
 ### CI/CD Integration
 

@@ -10,8 +10,9 @@ const { runCheck } = require('./commands/check');
 const { runDocs } = require('./commands/docs');
 const { runDiff } = require('./commands/diff');
 const { runRedact } = require('./commands/redact');
+const { runTemplate } = require('./commands/template');
 
-const VERSION = '1.1.0';
+const VERSION = '1.3.0';
 
 function parseArgs(argv) {
   const args = argv.slice(2);
@@ -39,6 +40,13 @@ function parseArgs(argv) {
     options.fileA = positional[0];
     options.fileB = positional[1];
   }
+  // template 子命令: envguard template list / envguard template apply <name>
+  if (command === 'template' && positional.length >= 1) {
+    options.subCommand = positional[0];
+    if (positional.length >= 2) {
+      options.template = positional[1];
+    }
+  }
 
   return { command, options };
 }
@@ -57,6 +65,12 @@ Commands:
   docs              Generate .env.example and documentation
   diff              Compare two .env files
   redact            Redact sensitive values in .env files or log output
+  template          Apply framework templates (list / apply)
+
+Template Subcommands:
+  template list                   List available framework templates
+  template apply <name>           Apply a template to create config
+  template apply <name> --merge   Merge template into existing config
 
 Options:
   --config <path>   Path to config file
@@ -65,6 +79,7 @@ Options:
   --severity <level> Minimum severity for security check (low|medium|high|critical)
   --recursive       Scan subdirectories for .env files
   --force           Overwrite existing files
+  --merge           Merge template into existing config
   --allow-failure   Exit with code 0 even on errors
   --mask <string>   Redaction mask (default: ***)
   --text <string>   Text to redact (for redact command)
@@ -82,6 +97,9 @@ Examples:
   envguard redact
   envguard redact --output .env.redacted
   envguard redact --text "Connected as admin:s3cret@db"
+  envguard template list
+  envguard template apply nextjs
+  envguard template apply express --merge
 `);
 }
 
@@ -116,6 +134,9 @@ function main() {
       break;
     case 'redact':
       runRedact({ ...options, cwd: process.cwd() });
+      break;
+    case 'template':
+      runTemplate({ ...options, cwd: process.cwd() });
       break;
     default:
       printHelp();

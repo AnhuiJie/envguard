@@ -7,3 +7,5 @@ dist/
 .DS_Store
 coverage/
 docs/CODEX_APPLICATION.md
+docs/CONVERSATION_LOG.md
+docs/DEVTO_REPLY.md
