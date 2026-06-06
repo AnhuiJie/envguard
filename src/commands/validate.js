@@ -62,7 +62,9 @@ function runValidate(options = {}) {
 
   printSummary(results);
 
-  if (!results.valid && !options.allowFailure) {
+  // Support both camelCase and kebab-case: allowFailure or allow-failure
+  const allowFailure = options.allowFailure || options['allow-failure'];
+  if (!results.valid && !allowFailure) {
     process.exit(1);
   }
 

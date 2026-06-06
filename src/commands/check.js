@@ -53,7 +53,9 @@ function runCheck(options = {}) {
 
   console.log('');
 
-  if (allFindings.some((f) => f.severity === 'critical') && !options.allowFailure) {
+  // Support both camelCase and kebab-case: allowFailure or allow-failure
+  const allowFailure = options.allowFailure || options['allow-failure'];
+  if (allFindings.some((f) => f.severity === 'critical') && !allowFailure) {
     process.exit(1);
   }
 

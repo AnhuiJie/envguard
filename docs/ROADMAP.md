@@ -8,13 +8,13 @@
 
 ## 版本规划总览
 
-| 版本 | 主题 | 核心差异化 | 预计周期 |
-|------|------|-----------|----------|
-| v1.3 | 框架模板 | `envguard template` — 一键生成常见框架 schema | 1-2 周 |
-| v1.4 | 配置迁移 | `envguard migrate` — 废弃检测 + 自动迁移 | 2-3 周 |
-| v1.5 | 健康评分 | `envguard health` — 配置健康度仪表盘 | 2-3 周 |
-| v1.6 | Git 深度集成 | pre-commit hook + CI JSON 输出 | 1-2 周 |
-| v2.0 | 配置加密 | `envguard encrypt/decrypt` — 本地加密方案 | 3-4 周 |
+| 版本 | 主题 | 核心差异化 | 预计周期 | 状态 |
+|------|------|-----------|----------|------|
+| v1.3 | 框架模板 | `envguard template` — 一键生成常见框架 schema | 1-2 周 | ✅ 已完成 |
+| v1.4 | 配置迁移 | `envguard migrate` — 废弃检测 + 自动迁移 | 2-3 周 | 🔜 下一个 |
+| v1.5 | 健康评分 | `envguard health` — 配置健康度仪表盘 | 2-3 周 | 待开始 |
+| v1.6 | Git 深度集成 | pre-commit hook + CI JSON 输出 | 1-2 周 | 待开始 |
+| v2.0 | 配置加密 | `envguard encrypt/decrypt` — 本地加密方案 | 3-4 周 | 待开始 |
 
 ---
 
