@@ -4,7 +4,7 @@
   "description": "Environment variable & config validation, security scanning, and documentation generator for modern projects",
   "main": "src/index.js",
   "bin": {
-    "envguard": "./src/cli.js"
+    "envguard": "src/cli.js"
   },
   "scripts": {
     "start": "node src/cli.js",
@@ -32,7 +32,7 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/AnhuiJie/envguard"
+    "url": "git+https://github.com/AnhuiJie/envguard.git"
   },
   "engines": {
     "node": ">=18.0.0"
